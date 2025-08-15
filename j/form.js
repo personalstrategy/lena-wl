@@ -1,3 +1,4 @@
+// form.js - Fixed version
 // Form validation and submission
 const gdprCheckbox = document.getElementById('gdpr');
 const submitBtn = document.getElementById('submit-btn');
@@ -55,35 +56,34 @@ form.addEventListener('submit', async function(e) {
         });
 
         // With no-cors, we can't read the response, but the request should go through
-        // Show success message
-        successMessage.classList.remove('hidden');
+        // Get the paragraph element and update it
+        const waitlistParagraph = document.querySelector('#waitlist > p');
+        if (waitlistParagraph) {
+            waitlistParagraph.textContent = 'Thank you for joining the waitlist!';
+            waitlistParagraph.classList.add('success-text');
+        }
         
-        // Reset form
-        form.reset();
-        updateButtonState();
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            successMessage.classList.add('hidden');
-        }, 5000);
+        // Hide the form elements
+        emailInput.style.display = 'none';
+        submitBtn.style.display = 'none';
+        document.querySelector('.gdpr-container').style.display = 'none';
         
     } catch (error) {
         console.error('Submission error:', error);
         // Even with errors, the submission might have worked with no-cors
-        // Show success message anyway
-        successMessage.classList.remove('hidden');
+        // Update the success message anyway
+        const waitlistParagraph = document.querySelector('#waitlist > p');
+        if (waitlistParagraph) {
+            waitlistParagraph.textContent = 'Thank you for joining the waitlist!';
+            waitlistParagraph.classList.add('success-text');
+        }
         
-        // Reset form
-        form.reset();
-        updateButtonState();
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            successMessage.classList.add('hidden');
-        }, 5000);
+        // Hide the form elements
+        emailInput.style.display = 'none';
+        submitBtn.style.display = 'none';
+        document.querySelector('.gdpr-container').style.display = 'none';
     } finally {
-        // Always restore button text
+        // Always restore button text (though it will be hidden)
         submitBtn.textContent = originalBtnText;
-        // Button state will be updated by updateButtonState() after form.reset()
     }
 });
