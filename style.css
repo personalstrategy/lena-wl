@@ -585,7 +585,14 @@
 
             .footer {
                 min-height: 80vh;
-                padding: var(--spacing-m);
+            }
+
+            .track video {
+                width: 40vw;
+            }
+
+            .footerbrandwrapper {
+                height: 40vw;
             }
 
             .footer-links {
