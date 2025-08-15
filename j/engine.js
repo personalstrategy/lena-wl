@@ -175,3 +175,62 @@
 
         // Update on resize (for responsive behavior)
         window.addEventListener('resize', updateFeatures);
+
+
+
+const words = ['marketing', 'yoga', 'photography', 'guitar', 'quantum physics', 'gardening', 'javascript', 'trading', 'psychology', 'advanced math'];
+        let currentWordIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let isWaiting = false;
+        
+        const typingText = document.getElementById('typingText');
+        const typingSpeed = 100;
+        const deletingSpeed = 50;
+        const waitTime = 2000;
+        const deleteWaitTime = 500;
+
+        function typeEffect() {
+            const currentWord = words[currentWordIndex];
+            
+            if (isWaiting) {
+                setTimeout(() => {
+                    isWaiting = false;
+                    isDeleting = true;
+                    typeEffect();
+                }, isDeleting ? deleteWaitTime : waitTime);
+                return;
+            }
+            
+            if (isDeleting) {
+                if (currentCharIndex > 0) {
+                    currentCharIndex--;
+                    typingText.textContent = currentWord.substring(0, currentCharIndex);
+                    setTimeout(typeEffect, deletingSpeed);
+                } else {
+                    isDeleting = false;
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
+                    setTimeout(typeEffect, 200);
+                }
+            } else {
+                if (currentCharIndex < currentWord.length) {
+                    currentCharIndex++;
+                    typingText.textContent = currentWord.substring(0, currentCharIndex);
+                    setTimeout(typeEffect, typingSpeed);
+                } else {
+                    isWaiting = true;
+                    typeEffect();
+                }
+            }
+        }
+
+        // Start the typing effect
+        typeEffect();
+
+        // Add click interaction to Quick Essay button
+        document.querySelector('.quick-essay').addEventListener('click', function() {
+            this.style.transform = 'translateY(0px) scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-2px) scale(1)';
+            }, 100);
+        });
