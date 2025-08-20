@@ -42,7 +42,7 @@ form.addEventListener('submit', async function(e) {
     submitBtn.textContent = 'Submitting...';
 
     // Your Google Apps Script Web App URL
-    const endpoint = "https://script.google.com/macros/s/AKfycbz5LCQN2sBA-T-gNc0kTjMY9fX98Oo6fkKi4qYv5E2gPJ05bSOUpkVOLBkbl29Sdn1E7g/exec";
+    const endpoint = "https://script.google.com/macros/s/AKfycbzS8pdE9ePWozP3BOKFJgILpFmF0D-xfsZUzRdXn_ByT5YznHqoh7cO6hHP2vybhzACLQ/exec";
 
     try {
         // Send data to Google Sheets as JSON
